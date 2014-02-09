@@ -1,6 +1,6 @@
 //
 //  GSConfigurationWindowController.m
-//  XcodeSnippetGit
+//  GitSnippetXcodePlugin
 //
 //  Created by Arnaud Coomans on 06/02/14.
 //  Copyright (c) 2014 Arnaud Coomans. All rights reserved.
