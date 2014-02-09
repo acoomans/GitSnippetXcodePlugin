@@ -15,6 +15,7 @@
 		517F76DD18A8453F000FFA07 /* GSSnippetPlistUnarchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 517F76D718A8453F000FFA07 /* GSSnippetPlistUnarchiver.m */; };
 		517F76DE18A8453F000FFA07 /* GSSnippetTextArchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 517F76D918A8453F000FFA07 /* GSSnippetTextArchiver.m */; };
 		517F76DF18A8453F000FFA07 /* GSSnippetTextUnarchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 517F76DB18A8453F000FFA07 /* GSSnippetTextUnarchiver.m */; };
+		51C1AB7D18A849CF0015D309 /* NSString+Path.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C1AB7C18A849CF0015D309 /* NSString+Path.m */; };
 		51C3962518A841CD00514467 /* GSConfigurationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C3962318A841CD00514467 /* GSConfigurationWindowController.m */; };
 		51C3962618A841CD00514467 /* GSConfigurationWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51C3962418A841CD00514467 /* GSConfigurationWindowController.xib */; };
 		51F22CD118A844B600F14CBB /* GSSnippet.m in Sources */ = {isa = PBXBuildFile; fileRef = 51F22CD018A844B600F14CBB /* GSSnippet.m */; };
@@ -38,6 +39,8 @@
 		517F76D918A8453F000FFA07 /* GSSnippetTextArchiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSSnippetTextArchiver.m; sourceTree = "<group>"; };
 		517F76DA18A8453F000FFA07 /* GSSnippetTextUnarchiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSSnippetTextUnarchiver.h; sourceTree = "<group>"; };
 		517F76DB18A8453F000FFA07 /* GSSnippetTextUnarchiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSSnippetTextUnarchiver.m; sourceTree = "<group>"; };
+		51C1AB7B18A849CF0015D309 /* NSString+Path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Path.h"; sourceTree = "<group>"; };
+		51C1AB7C18A849CF0015D309 /* NSString+Path.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Path.m"; sourceTree = "<group>"; };
 		51C3962218A841CD00514467 /* GSConfigurationWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSConfigurationWindowController.h; sourceTree = "<group>"; };
 		51C3962318A841CD00514467 /* GSConfigurationWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSConfigurationWindowController.m; sourceTree = "<group>"; };
 		51C3962418A841CD00514467 /* GSConfigurationWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GSConfigurationWindowController.xib; sourceTree = "<group>"; };
@@ -92,6 +95,7 @@
 				51C3962718A8426C00514467 /* GitSnippet.h */,
 				5112DC5C18A840140018655E /* GitSnippetXcodePlugin.h */,
 				5112DC5D18A840140018655E /* GitSnippetXcodePlugin.m */,
+				51C1AB7A18A849BD0015D309 /* Categories */,
 				51F22CCE18A844B600F14CBB /* Classes */,
 				517F76D318A8453F000FFA07 /* Coders */,
 				51C3962118A841CD00514467 /* Controllers */,
@@ -123,6 +127,15 @@
 				517F76DB18A8453F000FFA07 /* GSSnippetTextUnarchiver.m */,
 			);
 			path = Coders;
+			sourceTree = "<group>";
+		};
+		51C1AB7A18A849BD0015D309 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				51C1AB7B18A849CF0015D309 /* NSString+Path.h */,
+				51C1AB7C18A849CF0015D309 /* NSString+Path.m */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 		51C3962118A841CD00514467 /* Controllers */ = {
@@ -209,6 +222,7 @@
 			files = (
 				5112DC5E18A840140018655E /* GitSnippetXcodePlugin.m in Sources */,
 				517F76DD18A8453F000FFA07 /* GSSnippetPlistUnarchiver.m in Sources */,
+				51C1AB7D18A849CF0015D309 /* NSString+Path.m in Sources */,
 				517F76DC18A8453F000FFA07 /* GSSnippetPlistArchiver.m in Sources */,
 				51C3962518A841CD00514467 /* GSConfigurationWindowController.m in Sources */,
 				51F22CD118A844B600F14CBB /* GSSnippet.m in Sources */,

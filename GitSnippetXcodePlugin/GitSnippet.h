@@ -9,6 +9,7 @@
 extern NSString * const GSRemoteRepositoryURLKey;
 
 #import "GitSnippetXcodePlugin.h"
+
 #import "GSSnippet.h"
 #import "GSSnippetPlistArchiver.h"
 #import "GSSnippetPlistUnarchiver.h"
