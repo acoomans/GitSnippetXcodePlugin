@@ -11,8 +11,13 @@
 		5112DC5518A840140018655E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5112DC5418A840140018655E /* Foundation.framework */; };
 		5112DC5B18A840140018655E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5112DC5918A840140018655E /* InfoPlist.strings */; };
 		5112DC5E18A840140018655E /* GitSnippetXcodePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5112DC5D18A840140018655E /* GitSnippetXcodePlugin.m */; };
+		517F76DC18A8453F000FFA07 /* GSSnippetPlistArchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 517F76D518A8453F000FFA07 /* GSSnippetPlistArchiver.m */; };
+		517F76DD18A8453F000FFA07 /* GSSnippetPlistUnarchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 517F76D718A8453F000FFA07 /* GSSnippetPlistUnarchiver.m */; };
+		517F76DE18A8453F000FFA07 /* GSSnippetTextArchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 517F76D918A8453F000FFA07 /* GSSnippetTextArchiver.m */; };
+		517F76DF18A8453F000FFA07 /* GSSnippetTextUnarchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 517F76DB18A8453F000FFA07 /* GSSnippetTextUnarchiver.m */; };
 		51C3962518A841CD00514467 /* GSConfigurationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C3962318A841CD00514467 /* GSConfigurationWindowController.m */; };
 		51C3962618A841CD00514467 /* GSConfigurationWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51C3962418A841CD00514467 /* GSConfigurationWindowController.xib */; };
+		51F22CD118A844B600F14CBB /* GSSnippet.m in Sources */ = {isa = PBXBuildFile; fileRef = 51F22CD018A844B600F14CBB /* GSSnippet.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,10 +29,21 @@
 		5112DC5C18A840140018655E /* GitSnippetXcodePlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitSnippetXcodePlugin.h; sourceTree = "<group>"; };
 		5112DC5D18A840140018655E /* GitSnippetXcodePlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GitSnippetXcodePlugin.m; sourceTree = "<group>"; };
 		5112DC5F18A840140018655E /* GitSnippetXcodePlugin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GitSnippetXcodePlugin-Prefix.pch"; sourceTree = "<group>"; };
+		511A88B118A8463800EDCE4B /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		517F76D418A8453F000FFA07 /* GSSnippetPlistArchiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSSnippetPlistArchiver.h; sourceTree = "<group>"; };
+		517F76D518A8453F000FFA07 /* GSSnippetPlistArchiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSSnippetPlistArchiver.m; sourceTree = "<group>"; };
+		517F76D618A8453F000FFA07 /* GSSnippetPlistUnarchiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSSnippetPlistUnarchiver.h; sourceTree = "<group>"; };
+		517F76D718A8453F000FFA07 /* GSSnippetPlistUnarchiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSSnippetPlistUnarchiver.m; sourceTree = "<group>"; };
+		517F76D818A8453F000FFA07 /* GSSnippetTextArchiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSSnippetTextArchiver.h; sourceTree = "<group>"; };
+		517F76D918A8453F000FFA07 /* GSSnippetTextArchiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSSnippetTextArchiver.m; sourceTree = "<group>"; };
+		517F76DA18A8453F000FFA07 /* GSSnippetTextUnarchiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSSnippetTextUnarchiver.h; sourceTree = "<group>"; };
+		517F76DB18A8453F000FFA07 /* GSSnippetTextUnarchiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSSnippetTextUnarchiver.m; sourceTree = "<group>"; };
 		51C3962218A841CD00514467 /* GSConfigurationWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSConfigurationWindowController.h; sourceTree = "<group>"; };
 		51C3962318A841CD00514467 /* GSConfigurationWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSConfigurationWindowController.m; sourceTree = "<group>"; };
 		51C3962418A841CD00514467 /* GSConfigurationWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GSConfigurationWindowController.xib; sourceTree = "<group>"; };
 		51C3962718A8426C00514467 /* GitSnippet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GitSnippet.h; sourceTree = "<group>"; };
+		51F22CCF18A844B600F14CBB /* GSSnippet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSSnippet.h; sourceTree = "<group>"; };
+		51F22CD018A844B600F14CBB /* GSSnippet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSSnippet.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +81,7 @@
 			children = (
 				5112DC5218A840140018655E /* AppKit.framework */,
 				5112DC5418A840140018655E /* Foundation.framework */,
+				511A88B118A8463800EDCE4B /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -75,6 +92,8 @@
 				51C3962718A8426C00514467 /* GitSnippet.h */,
 				5112DC5C18A840140018655E /* GitSnippetXcodePlugin.h */,
 				5112DC5D18A840140018655E /* GitSnippetXcodePlugin.m */,
+				51F22CCE18A844B600F14CBB /* Classes */,
+				517F76D318A8453F000FFA07 /* Coders */,
 				51C3962118A841CD00514467 /* Controllers */,
 				5112DC5718A840140018655E /* Supporting Files */,
 			);
@@ -91,6 +110,21 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		517F76D318A8453F000FFA07 /* Coders */ = {
+			isa = PBXGroup;
+			children = (
+				517F76D418A8453F000FFA07 /* GSSnippetPlistArchiver.h */,
+				517F76D518A8453F000FFA07 /* GSSnippetPlistArchiver.m */,
+				517F76D618A8453F000FFA07 /* GSSnippetPlistUnarchiver.h */,
+				517F76D718A8453F000FFA07 /* GSSnippetPlistUnarchiver.m */,
+				517F76D818A8453F000FFA07 /* GSSnippetTextArchiver.h */,
+				517F76D918A8453F000FFA07 /* GSSnippetTextArchiver.m */,
+				517F76DA18A8453F000FFA07 /* GSSnippetTextUnarchiver.h */,
+				517F76DB18A8453F000FFA07 /* GSSnippetTextUnarchiver.m */,
+			);
+			path = Coders;
+			sourceTree = "<group>";
+		};
 		51C3962118A841CD00514467 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +133,15 @@
 				51C3962418A841CD00514467 /* GSConfigurationWindowController.xib */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		51F22CCE18A844B600F14CBB /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				51F22CCF18A844B600F14CBB /* GSSnippet.h */,
+				51F22CD018A844B600F14CBB /* GSSnippet.m */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,7 +208,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				5112DC5E18A840140018655E /* GitSnippetXcodePlugin.m in Sources */,
+				517F76DD18A8453F000FFA07 /* GSSnippetPlistUnarchiver.m in Sources */,
+				517F76DC18A8453F000FFA07 /* GSSnippetPlistArchiver.m in Sources */,
 				51C3962518A841CD00514467 /* GSConfigurationWindowController.m in Sources */,
+				51F22CD118A844B600F14CBB /* GSSnippet.m in Sources */,
+				517F76DE18A8453F000FFA07 /* GSSnippetTextArchiver.m in Sources */,
+				517F76DF18A8453F000FFA07 /* GSSnippetTextUnarchiver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
