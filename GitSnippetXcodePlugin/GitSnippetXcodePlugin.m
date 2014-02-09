@@ -16,7 +16,6 @@ NSString * const GSRemoteRepositoryURLKey = @"GSRemoteRepositoryURLKey";
 
 @interface GitSnippetXcodePlugin()
 @property (nonatomic, strong) NSBundle *bundle;
-@property (nonatomic, strong) NSURL *remoteRepositoryURL;
 @property (nonatomic, strong) GSConfigurationWindowController *configurationWindowController;
 @end
 

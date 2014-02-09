@@ -9,5 +9,7 @@
 #import <AppKit/AppKit.h>
 
 @interface GitSnippetXcodePlugin : NSObject <NSWindowDelegate>
-
+@property (nonatomic, strong) NSURL *remoteRepositoryURL;
+@property (nonatomic, strong) NSString *localRepositoryPath;
+@property (nonatomic, strong) NSString *snippetDirectoryPath;
 @end
