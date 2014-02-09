@@ -8,12 +8,16 @@
 
 #import "GitSnippetXcodePlugin.h"
 
+#import "GSConfigurationWindowController.h"
+
 static GitSnippetXcodePlugin *sharedPlugin;
 static NSString * const pluginMenuTitle = @"Plug-ins";
+NSString * const GSRemoteRepositoryURLKey = @"GSRemoteRepositoryURLKey";
 
 @interface GitSnippetXcodePlugin()
-
 @property (nonatomic, strong) NSBundle *bundle;
+@property (nonatomic, strong) NSURL *remoteRepositoryURL;
+@property (nonatomic, strong) GSConfigurationWindowController *configurationWindowController;
 @end
 
 @implementation GitSnippetXcodePlugin
@@ -55,8 +59,30 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
     }
     return self;
 }
+
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - Properties
+
+- (NSString*)snippetDirectoryPath {
+    NSString *libraryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject];
+    NSString *snippetDirectoryPath = [NSString pathWithComponents:@[libraryPath, @"Developer", @"Xcode", @"UserData", @"CodeSnippets"]];
+    return snippetDirectoryPath;
+}
+
+- (void)setRemoteRepositoryURL:(NSURL*)snippetRemoteRepositoryURL {
+    [[NSUserDefaults standardUserDefaults] setURL:snippetRemoteRepositoryURL forKey:GSRemoteRepositoryURLKey];
+}
+
+- (NSURL*)remoteRepositoryURL {
+    return [[NSUserDefaults standardUserDefaults] URLForKey:GSRemoteRepositoryURLKey];
+}
+
+
+- (NSString*)localRepositoryPath {
+    return [NSString pathWithComponents:@[self.snippetDirectoryPath, @"git"]];
 }
 
 #pragma mark - Menu and actions
@@ -78,9 +104,19 @@ static NSString * const pluginMenuTitle = @"Plug-ins";
 #pragma mark - Actions
 
 - (void)configureMenuAction {
+    self.configurationWindowController = [[GSConfigurationWindowController alloc] initWithWindowNibName:NSStringFromClass(GSConfigurationWindowController.class)];
+    self.configurationWindowController.window.delegate = self;
+    [self.configurationWindowController.window makeKeyWindow];
 }
 
 - (void)syncMenuAction {
 }
+
+#pragma mark - NSWindowDelegate
+
+- (void)windowWillClose:(NSNotification *)notification {
+    self.configurationWindowController = nil;
+}
+
 
 @end
