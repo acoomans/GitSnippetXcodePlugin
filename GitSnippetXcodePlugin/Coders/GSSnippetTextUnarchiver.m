@@ -95,7 +95,7 @@ return [self unarchiveObjectWithString:[NSString stringWithContentsOfFile:file]]
             }
             
         } else {
-            contents = [[contents stringByAppendingString:line] stringByAppendingString:@"\n"];
+            contents = [[[contents stringByAppendingString:line] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]  stringByAppendingString:@"\n"];
         }
         
         i++;

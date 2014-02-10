@@ -10,7 +10,9 @@
 
 #import "GSConfigurationWindowController.h"
 #import "GitSnippet.h"
+
 #import "NSString+Path.h"
+#import "NSTask+Extras.h"
 
 
 static GitSnippetXcodePlugin *sharedPlugin;
@@ -128,13 +130,18 @@ NSString * const GSRemoteRepositoryURLKey = @"GSRemoteRepositoryURLKey";
 #pragma mark -
 
 - (void)initializeLocalRepository {
-    NSError *error = nil;
     if (![[NSFileManager defaultManager] fileExistsAtPath:self.localRepositoryPath]) {
+        /*
+         NSError *error = nil;
         [[NSFileManager defaultManager] createDirectoryAtPath:self.localRepositoryPath
                                   withIntermediateDirectories:YES
                                                    attributes:nil
                                                         error:&error];
-        NSTask *task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/git" arguments:@[@"init", self.localRepositoryPath]];
+        //NSTask *task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/git" arguments:@[@"init", self.localRepositoryPath]];
+
+        [task waitUntilExit];
+         */
+        NSTask *task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/git" arguments:@[@"clone", self.remoteRepositoryURL.absoluteString, self.localRepositoryPath]];
         [task waitUntilExit];
     }
 }
@@ -143,24 +150,30 @@ NSString * const GSRemoteRepositoryURLKey = @"GSRemoteRepositoryURLKey";
     
     NSTask *task;
     
-    task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/git" arguments:@[@"add", @"--all", @"."]];
+    task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/git" arguments:@[@"add", @"--all", @"."]
+                       inCurrentDirectoryPath:self.localRepositoryPath];
     [task waitUntilExit];
     
-    task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/git" arguments:@[@"commit", @"--allow-empty-message", @"-m", @""]];
+    task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/git" arguments:@[@"commit", @"--allow-empty-message", @"-m", @""]
+                       inCurrentDirectoryPath:self.localRepositoryPath];
     [task waitUntilExit];
     
-    task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/git" arguments:@[@"pull", @"-s", @"recursive", @"-X", @"ours", @"--no-commit"]];
+    task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/git" arguments:@[@"pull", @"-s", @"recursive", @"-X", @"ours", @"--no-commit"]
+                       inCurrentDirectoryPath:self.localRepositoryPath];
     [task waitUntilExit];
     
     if (task.terminationStatus != 0) {
-        task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/git" arguments:@[@"pull", @"-s", @"ours", @"--no-commit"]];
+        task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/git" arguments:@[@"pull", @"-s", @"ours", @"--no-commit"]
+                           inCurrentDirectoryPath:self.localRepositoryPath];
         [task waitUntilExit];
     }
     
-    task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/git" arguments:@[@"commit", @"--allow-empty-message", @"-m", @""]];
+    task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/git" arguments:@[@"commit", @"--allow-empty-message", @"-m", @""]
+                       inCurrentDirectoryPath:self.localRepositoryPath];
     [task waitUntilExit];
     
-    task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/git" arguments:@[@"push"]];
+    task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/git" arguments:@[@"push"]
+                       inCurrentDirectoryPath:self.localRepositoryPath];
     [task waitUntilExit];
 }
 
@@ -212,12 +225,16 @@ NSString * const GSRemoteRepositoryURLKey = @"GSRemoteRepositoryURLKey";
         
         if (!isDirectory && ![textFilename hasPrefix:@"."]) {
             
-            GSSnippet *snippet = [[GSSnippet alloc] initWithCoder:[GSSnippetTextUnarchiver unarchiveObjectWithFile:textPath]];
-            
-            NSString *plistFilename =  [[snippet.identifier uppercaseString] stringByAppendingString:@".codesnippet"];
-            NSString *plistPath = [NSString pathWithComponents:@[self.snippetDirectoryPath, plistFilename]];
-            
-            [GSSnippetPlistArchiver archiveRootObject:snippet toFile:plistPath];
+            @try {
+                GSSnippet *snippet = [[GSSnippet alloc] initWithCoder:[GSSnippetTextUnarchiver unarchiveObjectWithFile:textPath]];
+                
+                NSString *plistFilename =  [[snippet.identifier uppercaseString] stringByAppendingString:@".codesnippet"];
+                NSString *plistPath = [NSString pathWithComponents:@[self.snippetDirectoryPath, plistFilename]];
+                
+                [GSSnippetPlistArchiver archiveRootObject:snippet toFile:plistPath];
+            }
+            @catch (NSException *e) {
+            }
         }
     }
 }

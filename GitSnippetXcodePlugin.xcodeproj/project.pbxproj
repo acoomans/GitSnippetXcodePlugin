@@ -11,15 +11,40 @@
 		5112DC5518A840140018655E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5112DC5418A840140018655E /* Foundation.framework */; };
 		5112DC5B18A840140018655E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5112DC5918A840140018655E /* InfoPlist.strings */; };
 		5112DC5E18A840140018655E /* GitSnippetXcodePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5112DC5D18A840140018655E /* GitSnippetXcodePlugin.m */; };
+		5155884218A8509200447A51 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 511A88B118A8463800EDCE4B /* SenTestingKit.framework */; };
+		5155884818A8509200447A51 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5155884618A8509200447A51 /* InfoPlist.strings */; };
+		5155884A18A8509200447A51 /* GitSnippetXcodePlugin_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5155884918A8509200447A51 /* GitSnippetXcodePlugin_Tests.m */; };
+		5155885118A8515800447A51 /* GitSnippetXcodePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5112DC5D18A840140018655E /* GitSnippetXcodePlugin.m */; };
+		5155885218A8515D00447A51 /* NSString+Path.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C1AB7C18A849CF0015D309 /* NSString+Path.m */; };
+		5155885318A8516000447A51 /* NSTask+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 518BEB8D18A84BAD00A403C8 /* NSTask+Extras.m */; };
+		5155885418A8516200447A51 /* GSSnippet.m in Sources */ = {isa = PBXBuildFile; fileRef = 51F22CD018A844B600F14CBB /* GSSnippet.m */; };
+		5155885518A8516A00447A51 /* GSSnippetPlistArchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 517F76D518A8453F000FFA07 /* GSSnippetPlistArchiver.m */; };
+		5155885618A8516A00447A51 /* GSSnippetPlistUnarchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 517F76D718A8453F000FFA07 /* GSSnippetPlistUnarchiver.m */; };
+		5155885718A8516A00447A51 /* GSSnippetTextArchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 517F76D918A8453F000FFA07 /* GSSnippetTextArchiver.m */; };
+		5155885818A8516A00447A51 /* GSSnippetTextUnarchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 517F76DB18A8453F000FFA07 /* GSSnippetTextUnarchiver.m */; };
+		5155885B18A8518900447A51 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5112DC5218A840140018655E /* AppKit.framework */; };
+		5155885C18A8519400447A51 /* GSConfigurationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C3962318A841CD00514467 /* GSConfigurationWindowController.m */; };
+		5155885D18A8519400447A51 /* GSConfigurationWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51C3962418A841CD00514467 /* GSConfigurationWindowController.xib */; };
 		517F76DC18A8453F000FFA07 /* GSSnippetPlistArchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 517F76D518A8453F000FFA07 /* GSSnippetPlistArchiver.m */; };
 		517F76DD18A8453F000FFA07 /* GSSnippetPlistUnarchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 517F76D718A8453F000FFA07 /* GSSnippetPlistUnarchiver.m */; };
 		517F76DE18A8453F000FFA07 /* GSSnippetTextArchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 517F76D918A8453F000FFA07 /* GSSnippetTextArchiver.m */; };
 		517F76DF18A8453F000FFA07 /* GSSnippetTextUnarchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 517F76DB18A8453F000FFA07 /* GSSnippetTextUnarchiver.m */; };
+		518BEB8E18A84BAD00A403C8 /* NSTask+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 518BEB8D18A84BAD00A403C8 /* NSTask+Extras.m */; };
 		51C1AB7D18A849CF0015D309 /* NSString+Path.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C1AB7C18A849CF0015D309 /* NSString+Path.m */; };
 		51C3962518A841CD00514467 /* GSConfigurationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C3962318A841CD00514467 /* GSConfigurationWindowController.m */; };
 		51C3962618A841CD00514467 /* GSConfigurationWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51C3962418A841CD00514467 /* GSConfigurationWindowController.xib */; };
 		51F22CD118A844B600F14CBB /* GSSnippet.m in Sources */ = {isa = PBXBuildFile; fileRef = 51F22CD018A844B600F14CBB /* GSSnippet.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5155884C18A8509200447A51 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5112DC4718A840140018655E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5112DC4E18A840140018655E;
+			remoteInfo = GitSnippetXcodePlugin;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		5112DC4F18A840140018655E /* GitSnippetXcodePlugin.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitSnippetXcodePlugin.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -31,6 +56,11 @@
 		5112DC5D18A840140018655E /* GitSnippetXcodePlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GitSnippetXcodePlugin.m; sourceTree = "<group>"; };
 		5112DC5F18A840140018655E /* GitSnippetXcodePlugin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GitSnippetXcodePlugin-Prefix.pch"; sourceTree = "<group>"; };
 		511A88B118A8463800EDCE4B /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		5155884118A8509200447A51 /* GitSnippetXcodePlugin Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GitSnippetXcodePlugin Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5155884518A8509200447A51 /* GitSnippetXcodePlugin Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GitSnippetXcodePlugin Tests-Info.plist"; sourceTree = "<group>"; };
+		5155884718A8509200447A51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5155884918A8509200447A51 /* GitSnippetXcodePlugin_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GitSnippetXcodePlugin_Tests.m; sourceTree = "<group>"; };
+		5155884B18A8509200447A51 /* GitSnippetXcodePlugin Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GitSnippetXcodePlugin Tests-Prefix.pch"; sourceTree = "<group>"; };
 		517F76D418A8453F000FFA07 /* GSSnippetPlistArchiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSSnippetPlistArchiver.h; sourceTree = "<group>"; };
 		517F76D518A8453F000FFA07 /* GSSnippetPlistArchiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSSnippetPlistArchiver.m; sourceTree = "<group>"; };
 		517F76D618A8453F000FFA07 /* GSSnippetPlistUnarchiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSSnippetPlistUnarchiver.h; sourceTree = "<group>"; };
@@ -39,6 +69,8 @@
 		517F76D918A8453F000FFA07 /* GSSnippetTextArchiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSSnippetTextArchiver.m; sourceTree = "<group>"; };
 		517F76DA18A8453F000FFA07 /* GSSnippetTextUnarchiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSSnippetTextUnarchiver.h; sourceTree = "<group>"; };
 		517F76DB18A8453F000FFA07 /* GSSnippetTextUnarchiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSSnippetTextUnarchiver.m; sourceTree = "<group>"; };
+		518BEB8C18A84BAD00A403C8 /* NSTask+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTask+Extras.h"; sourceTree = "<group>"; };
+		518BEB8D18A84BAD00A403C8 /* NSTask+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTask+Extras.m"; sourceTree = "<group>"; };
 		51C1AB7B18A849CF0015D309 /* NSString+Path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Path.h"; sourceTree = "<group>"; };
 		51C1AB7C18A849CF0015D309 /* NSString+Path.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Path.m"; sourceTree = "<group>"; };
 		51C3962218A841CD00514467 /* GSConfigurationWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSConfigurationWindowController.h; sourceTree = "<group>"; };
@@ -59,6 +91,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5155883E18A8509200447A51 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5155885B18A8518900447A51 /* AppKit.framework in Frameworks */,
+				5155884218A8509200447A51 /* SenTestingKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -66,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				5112DC5618A840140018655E /* GitSnippetXcodePlugin */,
+				5155884318A8509200447A51 /* GitSnippetXcodePlugin Tests */,
 				5112DC5118A840140018655E /* Frameworks */,
 				5112DC5018A840140018655E /* Products */,
 			);
@@ -75,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				5112DC4F18A840140018655E /* GitSnippetXcodePlugin.xcplugin */,
+				5155884118A8509200447A51 /* GitSnippetXcodePlugin Tests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -114,6 +157,25 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		5155884318A8509200447A51 /* GitSnippetXcodePlugin Tests */ = {
+			isa = PBXGroup;
+			children = (
+				5155884918A8509200447A51 /* GitSnippetXcodePlugin_Tests.m */,
+				5155884418A8509200447A51 /* Supporting Files */,
+			);
+			path = "GitSnippetXcodePlugin Tests";
+			sourceTree = "<group>";
+		};
+		5155884418A8509200447A51 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5155884518A8509200447A51 /* GitSnippetXcodePlugin Tests-Info.plist */,
+				5155884618A8509200447A51 /* InfoPlist.strings */,
+				5155884B18A8509200447A51 /* GitSnippetXcodePlugin Tests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		517F76D318A8453F000FFA07 /* Coders */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +196,8 @@
 			children = (
 				51C1AB7B18A849CF0015D309 /* NSString+Path.h */,
 				51C1AB7C18A849CF0015D309 /* NSString+Path.m */,
+				518BEB8C18A84BAD00A403C8 /* NSTask+Extras.h */,
+				518BEB8D18A84BAD00A403C8 /* NSTask+Extras.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -177,6 +241,24 @@
 			productReference = 5112DC4F18A840140018655E /* GitSnippetXcodePlugin.xcplugin */;
 			productType = "com.apple.product-type.bundle";
 		};
+		5155884018A8509200447A51 /* GitSnippetXcodePlugin Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5155885018A8509200447A51 /* Build configuration list for PBXNativeTarget "GitSnippetXcodePlugin Tests" */;
+			buildPhases = (
+				5155883D18A8509200447A51 /* Sources */,
+				5155883E18A8509200447A51 /* Frameworks */,
+				5155883F18A8509200447A51 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5155884D18A8509200447A51 /* PBXTargetDependency */,
+			);
+			name = "GitSnippetXcodePlugin Tests";
+			productName = "GitSnippetXcodePlugin Tests";
+			productReference = 5155884118A8509200447A51 /* GitSnippetXcodePlugin Tests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -185,6 +267,11 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Arnaud Coomans";
+				TargetAttributes = {
+					5155884018A8509200447A51 = {
+						TestTargetID = 5112DC4E18A840140018655E;
+					};
+				};
 			};
 			buildConfigurationList = 5112DC4A18A840140018655E /* Build configuration list for PBXProject "GitSnippetXcodePlugin" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -199,6 +286,7 @@
 			projectRoot = "";
 			targets = (
 				5112DC4E18A840140018655E /* GitSnippetXcodePlugin */,
+				5155884018A8509200447A51 /* GitSnippetXcodePlugin Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -213,6 +301,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5155883F18A8509200447A51 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5155885D18A8519400447A51 /* GSConfigurationWindowController.xib in Resources */,
+				5155884818A8509200447A51 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -224,6 +321,7 @@
 				517F76DD18A8453F000FFA07 /* GSSnippetPlistUnarchiver.m in Sources */,
 				51C1AB7D18A849CF0015D309 /* NSString+Path.m in Sources */,
 				517F76DC18A8453F000FFA07 /* GSSnippetPlistArchiver.m in Sources */,
+				518BEB8E18A84BAD00A403C8 /* NSTask+Extras.m in Sources */,
 				51C3962518A841CD00514467 /* GSConfigurationWindowController.m in Sources */,
 				51F22CD118A844B600F14CBB /* GSSnippet.m in Sources */,
 				517F76DE18A8453F000FFA07 /* GSSnippetTextArchiver.m in Sources */,
@@ -231,13 +329,46 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5155883D18A8509200447A51 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5155885718A8516A00447A51 /* GSSnippetTextArchiver.m in Sources */,
+				5155885618A8516A00447A51 /* GSSnippetPlistUnarchiver.m in Sources */,
+				5155885318A8516000447A51 /* NSTask+Extras.m in Sources */,
+				5155884A18A8509200447A51 /* GitSnippetXcodePlugin_Tests.m in Sources */,
+				5155885518A8516A00447A51 /* GSSnippetPlistArchiver.m in Sources */,
+				5155885818A8516A00447A51 /* GSSnippetTextUnarchiver.m in Sources */,
+				5155885C18A8519400447A51 /* GSConfigurationWindowController.m in Sources */,
+				5155885218A8515D00447A51 /* NSString+Path.m in Sources */,
+				5155885418A8516200447A51 /* GSSnippet.m in Sources */,
+				5155885118A8515800447A51 /* GitSnippetXcodePlugin.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5155884D18A8509200447A51 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5112DC4E18A840140018655E /* GitSnippetXcodePlugin */;
+			targetProxy = 5155884C18A8509200447A51 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		5112DC5918A840140018655E /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				5112DC5A18A840140018655E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		5155884618A8509200447A51 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5155884718A8509200447A51 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -345,6 +476,40 @@
 			};
 			name = Release;
 		};
+		5155884E18A8509200447A51 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GitSnippetXcodePlugin Tests/GitSnippetXcodePlugin Tests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "GitSnippetXcodePlugin Tests/GitSnippetXcodePlugin Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		5155884F18A8509200447A51 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GitSnippetXcodePlugin Tests/GitSnippetXcodePlugin Tests-Prefix.pch";
+				INFOPLIST_FILE = "GitSnippetXcodePlugin Tests/GitSnippetXcodePlugin Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -365,6 +530,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		5155885018A8509200447A51 /* Build configuration list for PBXNativeTarget "GitSnippetXcodePlugin Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5155884E18A8509200447A51 /* Debug */,
+				5155884F18A8509200447A51 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
