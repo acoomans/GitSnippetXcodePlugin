@@ -19,4 +19,26 @@
     return task;
 }
 
+
++ (NSTask *)launchAndWaitTaskWithLaunchPath:(NSString *)path arguments:(NSArray *)arguments inCurrentDirectoryPath:(NSString*)directoryPath standardOutputAndError:(NSString* __autoreleasing *)output {
+
+    NSPipe *pipe = [NSPipe pipe];
+    
+    NSTask *task = [[NSTask alloc] init];
+    task.launchPath = path;
+    task.arguments = arguments;
+    task.currentDirectoryPath = directoryPath;
+    //task.standardOutput = task.standardError = pipe;
+    task.standardOutput = pipe;
+    [task launch];
+    [task waitUntilExit];
+    
+    NSData *data = [[pipe fileHandleForReading] availableData];
+    *output = [NSString stringWithFormat:@"$ %@ %@\n %@\n",
+               task.launchPath,
+               [task.arguments componentsJoinedByString:@" "],
+               [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
+    return task;
+}
+
 @end

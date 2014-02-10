@@ -27,6 +27,9 @@
     [plugin updateLocalWithRemoteRepository];
     [plugin removeAllSnippets];
     [plugin copySnippetsFromLocalRepository];
+    
+    NSLog(@"%@", plugin.taskLog);
+    
 }
 
 @end

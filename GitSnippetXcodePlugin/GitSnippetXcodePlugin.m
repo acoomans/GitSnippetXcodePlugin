@@ -8,13 +8,6 @@
 
 #import "GitSnippetXcodePlugin.h"
 
-#import "GSConfigurationWindowController.h"
-#import "GitSnippet.h"
-
-#import "NSString+Path.h"
-#import "NSTask+Extras.h"
-
-
 static GitSnippetXcodePlugin *sharedPlugin;
 static NSString * const pluginMenuTitle = @"Plug-ins";
 NSString * const GSRemoteRepositoryURLKey = @"GSRemoteRepositoryURLKey";
@@ -22,6 +15,7 @@ NSString * const GSRemoteRepositoryURLKey = @"GSRemoteRepositoryURLKey";
 @interface GitSnippetXcodePlugin()
 @property (nonatomic, strong) NSBundle *bundle;
 @property (nonatomic, strong) GSConfigurationWindowController *configurationWindowController;
+@property (nonatomic, strong) GSLogWindowController *logWindowController;
 @end
 
 @implementation GitSnippetXcodePlugin
@@ -37,11 +31,16 @@ NSString * const GSRemoteRepositoryURLKey = @"GSRemoteRepositoryURLKey";
     }
 }
 
+- (id)init {
+    return [self initWithBundle:nil];
+}
+
 - (id)initWithBundle:(NSBundle *)plugin {
     if (self = [super init]) {
         
         // reference to plugin's bundle, for resource acccess
         self.bundle = plugin;
+        self.taskLog = @"";
         
         // Create menu items, initialize UI, etc.
         NSMenu *pluginMenu = [self pluginMenu];
@@ -53,7 +52,11 @@ NSString * const GSRemoteRepositoryURLKey = @"GSRemoteRepositoryURLKey";
             actionMenuItem.target = self;
             [pluginMenu addItem:actionMenuItem];
             
-            actionMenuItem = [[NSMenuItem alloc] initWithTitle:@"Configure Git Repository" action:@selector(configureMenuAction) keyEquivalent:@""];
+            actionMenuItem = [[NSMenuItem alloc] initWithTitle:@"Configure Git Snippets" action:@selector(configureMenuAction) keyEquivalent:@""];
+            actionMenuItem.target = self;
+            [pluginMenu addItem:actionMenuItem];
+            
+            actionMenuItem = [[NSMenuItem alloc] initWithTitle:@"View Log" action:@selector(viewLogAction) keyEquivalent:@""];
             actionMenuItem.target = self;
             [pluginMenu addItem:actionMenuItem];
             
@@ -69,6 +72,11 @@ NSString * const GSRemoteRepositoryURLKey = @"GSRemoteRepositoryURLKey";
 }
 
 #pragma mark - Properties
+
+- (void)setTaskLog:(NSString *)taskLog {
+    _taskLog = taskLog;
+    [self.logWindowController reloadData];
+}
 
 - (NSString*)snippetDirectoryPath {
     NSString *libraryPath = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) firstObject];
@@ -121,7 +129,6 @@ NSString * const GSRemoteRepositoryURLKey = @"GSRemoteRepositoryURLKey";
                                        alternateButton:nil
                                            otherButton:nil
                              informativeTextWithFormat:@""];
-        alert.delegate = self;
         [alert runModal];
         [self configureMenuAction];
     }
@@ -133,11 +140,32 @@ NSString * const GSRemoteRepositoryURLKey = @"GSRemoteRepositoryURLKey";
     [self copySnippetsFromLocalRepository];
 }
 
+- (void)viewLogAction {
+    self.logWindowController = [[GSLogWindowController alloc] initWithWindowNibName:NSStringFromClass(GSLogWindowController.class)];
+    self.logWindowController.delegate = self;
+    self.logWindowController.window.delegate = self;
+    [self.logWindowController.window makeKeyWindow];
+}
+
 #pragma mark - NSWindowDelegate
 
 - (void)windowWillClose:(NSNotification *)notification {
-    self.configurationWindowController = nil;
+    
+    if (notification.object == self.configurationWindowController.window) {
+        self.configurationWindowController = nil;
+    }
+
+    if (notification.object == self.logWindowController.window) {
+        self.logWindowController = nil;
+    }
 }
+
+#pragma mark - GSLogWindowControllerDataSource
+
+- (NSString*)textForlogWindowController:(GSLogWindowController*)logWindowController {
+    return self.taskLog;
+}
+
 
 #pragma mark -
 
@@ -153,40 +181,56 @@ NSString * const GSRemoteRepositoryURLKey = @"GSRemoteRepositoryURLKey";
 
         [task waitUntilExit];
          */
-        NSTask *task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/git" arguments:@[@"clone", self.remoteRepositoryURL.absoluteString, self.localRepositoryPath]];
-        [task waitUntilExit];
+        NSString *output;
+        [NSTask launchAndWaitTaskWithLaunchPath:@"/usr/bin/git"
+                                      arguments:@[@"clone", self.remoteRepositoryURL.absoluteString, self.localRepositoryPath]
+                         inCurrentDirectoryPath:self.snippetDirectoryPath
+                         standardOutputAndError:&output];
+        self.taskLog = [self.taskLog stringByAppendingString:output];
     }
 }
 
 - (void)updateLocalWithRemoteRepository {
     
-    NSTask *task;
+    NSString *output;
     
-    task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/git" arguments:@[@"add", @"--all", @"."]
-                       inCurrentDirectoryPath:self.localRepositoryPath];
-    [task waitUntilExit];
+    [NSTask launchAndWaitTaskWithLaunchPath:@"/usr/bin/git"
+                                  arguments:@[@"add", @"--all", @"."]
+                     inCurrentDirectoryPath:self.localRepositoryPath
+                     standardOutputAndError:&output];
+    self.taskLog = [self.taskLog stringByAppendingString:output];
     
-    task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/git" arguments:@[@"commit", @"--allow-empty-message", @"-m", @""]
-                       inCurrentDirectoryPath:self.localRepositoryPath];
-    [task waitUntilExit];
+    [NSTask launchAndWaitTaskWithLaunchPath:@"/usr/bin/git"
+                                  arguments:@[@"commit", @"--allow-empty-message", @"-m", @""]
+                     inCurrentDirectoryPath:self.localRepositoryPath
+                     standardOutputAndError:&output];
+    self.taskLog = [self.taskLog stringByAppendingString:output];
     
-    task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/git" arguments:@[@"pull", @"-s", @"recursive", @"-X", @"ours", @"--no-commit"]
-                       inCurrentDirectoryPath:self.localRepositoryPath];
-    [task waitUntilExit];
-    
+    NSTask *task = [NSTask launchAndWaitTaskWithLaunchPath:@"/usr/bin/git"
+                                                 arguments:@[@"pull", @"-s", @"recursive", @"-X", @"ours", @"--no-commit"]
+                                    inCurrentDirectoryPath:self.localRepositoryPath
+                                    standardOutputAndError:&output];
+    self.taskLog = [self.taskLog stringByAppendingString:output];
+
     if (task.terminationStatus != 0) {
-        task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/git" arguments:@[@"pull", @"-s", @"ours", @"--no-commit"]
-                           inCurrentDirectoryPath:self.localRepositoryPath];
-        [task waitUntilExit];
+        [NSTask launchAndWaitTaskWithLaunchPath:@"/usr/bin/git"
+                                      arguments:@[@"pull", @"-s", @"ours", @"--no-commit"]
+                         inCurrentDirectoryPath:self.localRepositoryPath
+                         standardOutputAndError:&output];
+        self.taskLog = [self.taskLog stringByAppendingString:output];
     }
     
-    task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/git" arguments:@[@"commit", @"--allow-empty-message", @"-m", @""]
-                       inCurrentDirectoryPath:self.localRepositoryPath];
-    [task waitUntilExit];
+    [NSTask launchAndWaitTaskWithLaunchPath:@"/usr/bin/git"
+                                  arguments:@[@"commit", @"--allow-empty-message", @"-m", @""]
+                     inCurrentDirectoryPath:self.localRepositoryPath
+                     standardOutputAndError:&output];
+    self.taskLog = [self.taskLog stringByAppendingString:output];
     
-    task = [NSTask launchedTaskWithLaunchPath:@"/usr/bin/git" arguments:@[@"push"]
-                       inCurrentDirectoryPath:self.localRepositoryPath];
-    [task waitUntilExit];
+    [NSTask launchAndWaitTaskWithLaunchPath:@"/usr/bin/git"
+                                  arguments:@[@"push"]
+                     inCurrentDirectoryPath:self.localRepositoryPath
+                     standardOutputAndError:&output];
+    self.taskLog = [self.taskLog stringByAppendingString:output];
 }
 
 - (void)removeAllSnippets {

@@ -8,11 +8,21 @@
 
 #import <AppKit/AppKit.h>
 
-@interface GitSnippetXcodePlugin : NSObject <NSWindowDelegate>
+#import "GSConfigurationWindowController.h"
+#import "GSLogWindowController.h"
+
+#import "GitSnippet.h"
+
+#import "NSString+Path.h"
+#import "NSTask+Extras.h"
+
+
+@interface GitSnippetXcodePlugin : NSObject <NSWindowDelegate, GSLogWindowControllerDataSource>
 
 @property (nonatomic, strong) NSURL *remoteRepositoryURL;
 @property (nonatomic, strong) NSString *localRepositoryPath;
 @property (nonatomic, strong) NSString *snippetDirectoryPath;
+@property (nonatomic, copy) NSString *taskLog;
 
 - (void)initializeLocalRepository;
 - (void)updateLocalWithRemoteRepository;

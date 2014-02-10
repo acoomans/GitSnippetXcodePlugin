@@ -30,6 +30,10 @@
 		517F76DE18A8453F000FFA07 /* GSSnippetTextArchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 517F76D918A8453F000FFA07 /* GSSnippetTextArchiver.m */; };
 		517F76DF18A8453F000FFA07 /* GSSnippetTextUnarchiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 517F76DB18A8453F000FFA07 /* GSSnippetTextUnarchiver.m */; };
 		518BEB8E18A84BAD00A403C8 /* NSTask+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 518BEB8D18A84BAD00A403C8 /* NSTask+Extras.m */; };
+		5193A24118A86045005A0C26 /* GSLogWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5193A23F18A86045005A0C26 /* GSLogWindowController.m */; };
+		5193A24218A86045005A0C26 /* GSLogWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5193A23F18A86045005A0C26 /* GSLogWindowController.m */; };
+		5193A24318A86045005A0C26 /* GSLogWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5193A24018A86045005A0C26 /* GSLogWindowController.xib */; };
+		5193A24418A86045005A0C26 /* GSLogWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5193A24018A86045005A0C26 /* GSLogWindowController.xib */; };
 		51C1AB7D18A849CF0015D309 /* NSString+Path.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C1AB7C18A849CF0015D309 /* NSString+Path.m */; };
 		51C3962518A841CD00514467 /* GSConfigurationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C3962318A841CD00514467 /* GSConfigurationWindowController.m */; };
 		51C3962618A841CD00514467 /* GSConfigurationWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51C3962418A841CD00514467 /* GSConfigurationWindowController.xib */; };
@@ -71,6 +75,9 @@
 		517F76DB18A8453F000FFA07 /* GSSnippetTextUnarchiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSSnippetTextUnarchiver.m; sourceTree = "<group>"; };
 		518BEB8C18A84BAD00A403C8 /* NSTask+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTask+Extras.h"; sourceTree = "<group>"; };
 		518BEB8D18A84BAD00A403C8 /* NSTask+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTask+Extras.m"; sourceTree = "<group>"; };
+		5193A23E18A86045005A0C26 /* GSLogWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSLogWindowController.h; sourceTree = "<group>"; };
+		5193A23F18A86045005A0C26 /* GSLogWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSLogWindowController.m; sourceTree = "<group>"; };
+		5193A24018A86045005A0C26 /* GSLogWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GSLogWindowController.xib; sourceTree = "<group>"; };
 		51C1AB7B18A849CF0015D309 /* NSString+Path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Path.h"; sourceTree = "<group>"; };
 		51C1AB7C18A849CF0015D309 /* NSString+Path.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Path.m"; sourceTree = "<group>"; };
 		51C3962218A841CD00514467 /* GSConfigurationWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSConfigurationWindowController.h; sourceTree = "<group>"; };
@@ -205,6 +212,9 @@
 		51C3962118A841CD00514467 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5193A23E18A86045005A0C26 /* GSLogWindowController.h */,
+				5193A23F18A86045005A0C26 /* GSLogWindowController.m */,
+				5193A24018A86045005A0C26 /* GSLogWindowController.xib */,
 				51C3962218A841CD00514467 /* GSConfigurationWindowController.h */,
 				51C3962318A841CD00514467 /* GSConfigurationWindowController.m */,
 				51C3962418A841CD00514467 /* GSConfigurationWindowController.xib */,
@@ -298,6 +308,7 @@
 			files = (
 				5112DC5B18A840140018655E /* InfoPlist.strings in Resources */,
 				51C3962618A841CD00514467 /* GSConfigurationWindowController.xib in Resources */,
+				5193A24318A86045005A0C26 /* GSLogWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +318,7 @@
 			files = (
 				5155885D18A8519400447A51 /* GSConfigurationWindowController.xib in Resources */,
 				5155884818A8509200447A51 /* InfoPlist.strings in Resources */,
+				5193A24418A86045005A0C26 /* GSLogWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +333,7 @@
 				517F76DD18A8453F000FFA07 /* GSSnippetPlistUnarchiver.m in Sources */,
 				51C1AB7D18A849CF0015D309 /* NSString+Path.m in Sources */,
 				517F76DC18A8453F000FFA07 /* GSSnippetPlistArchiver.m in Sources */,
+				5193A24118A86045005A0C26 /* GSLogWindowController.m in Sources */,
 				518BEB8E18A84BAD00A403C8 /* NSTask+Extras.m in Sources */,
 				51C3962518A841CD00514467 /* GSConfigurationWindowController.m in Sources */,
 				51F22CD118A844B600F14CBB /* GSSnippet.m in Sources */,
@@ -343,6 +356,7 @@
 				5155885218A8515D00447A51 /* NSString+Path.m in Sources */,
 				5155885418A8516200447A51 /* GSSnippet.m in Sources */,
 				5155885118A8515800447A51 /* GitSnippetXcodePlugin.m in Sources */,
+				5193A24218A86045005A0C26 /* GSLogWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,6 +552,7 @@
 				5155884F18A8509200447A51 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

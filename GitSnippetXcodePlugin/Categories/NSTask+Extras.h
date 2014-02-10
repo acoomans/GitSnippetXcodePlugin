@@ -11,5 +11,6 @@
 @interface NSTask (Extras)
 
 + (NSTask *)launchedTaskWithLaunchPath:(NSString *)path arguments:(NSArray *)arguments inCurrentDirectoryPath:(NSString*)directoryPath;
++ (NSTask *)launchAndWaitTaskWithLaunchPath:(NSString *)path arguments:(NSArray *)arguments inCurrentDirectoryPath:(NSString*)directoryPath standardOutputAndError:(NSString* __autoreleasing *)output;
 
 @end
