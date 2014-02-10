@@ -31,6 +31,8 @@ extern NSString * const IDECodeSnippetLanguageObjectiveC;
 
 @interface GSSnippet : NSObject <NSCoding>
 
+- (id)initWithDictionaryRepresentation:(NSDictionary*)dictionary;
+
 @property (nonatomic, copy) NSString *identifier;
 @property (nonatomic, assign) NSInteger version;
 
@@ -39,7 +41,7 @@ extern NSString * const IDECodeSnippetLanguageObjectiveC;
 
 @property (nonatomic, copy) NSArray *completionScopes;
 @property (nonatomic, copy) NSString *language;
-@property (nonatomic, assign) BOOL userSnippet;
+@property (nonatomic, assign, getter=isUserSnippet) BOOL userSnippet;
 
 @property (nonatomic, copy) NSString *contents;
 

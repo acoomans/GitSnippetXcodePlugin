@@ -16,8 +16,12 @@
 #import "NSString+Path.h"
 #import "NSTask+Extras.h"
 
+@class GSSnippet;
+
 
 @interface GitSnippetXcodePlugin : NSObject <NSWindowDelegate, GSLogWindowControllerDataSource>
+
++ (instancetype)sharedPlugin;
 
 @property (nonatomic, strong) NSURL *remoteRepositoryURL;
 @property (nonatomic, strong) NSString *localRepositoryPath;
@@ -29,5 +33,8 @@
 - (void)removeAllSnippets;
 - (void)copySnippetsToLocalRepository;
 - (void)copySnippetsFromLocalRepository;
+
+- (void)addSnippetToLocalRepository:(GSSnippet*)snippet;
+- (void)removeSnippetFromLocalRepository:(GSSnippet*)snippet;
 
 @end

@@ -39,11 +39,30 @@ NSString * const IDECodeSnippetLanguageObjectiveC = @"Xcode.SourceCodeLanguage.O
         
         self.title = @"";
         
-        self.completionScopes = @[IDECodeSnippetCompletionScopeClassImplementation];
+        self.completionScopes = @[@"All"];
         self.language = IDECodeSnippetLanguageObjectiveC;
         self.userSnippet = YES;
         
         self.contents = @"";
+    }
+    return self;
+}
+
+- (id)initWithDictionaryRepresentation:(NSDictionary*)dictionary {
+    self = [super init];
+    if (self) {
+        
+        self.identifier = dictionary[XSGSnippetIdentifierKey];
+        self.version = [dictionary[XSGSnippetVersionKey]?:@(1) boolValue];
+        
+        self.title = dictionary[XSGSnippetTitleKey];
+        self.summary = dictionary[XSGSnippetSummaryKey];
+        
+        self.completionScopes = [dictionary[XSGSnippetCompletionScopesKey] isKindOfClass:NSArray.class]? dictionary[XSGSnippetCompletionScopesKey] : @[@"All"];
+        self.language = dictionary[XSGSnippetLanguageKey]?:IDECodeSnippetLanguageObjectiveC;
+        self.userSnippet = [dictionary[XSGSnippetUserSnippetKey] boolValue];
+        
+        self.contents = dictionary[XSGSnippetContentsKey];
     }
     return self;
 }
@@ -59,7 +78,7 @@ NSString * const IDECodeSnippetLanguageObjectiveC = @"Xcode.SourceCodeLanguage.O
     
     [encoder encodeObject:self.completionScopes forKey:XSGSnippetCompletionScopesKey];
     [encoder encodeObject:self.language forKey:XSGSnippetLanguageKey];
-    [encoder encodeBool:self.userSnippet forKey:XSGSnippetUserSnippetKey];
+    [encoder encodeBool:self.isUserSnippet forKey:XSGSnippetUserSnippetKey];
 
     [encoder encodeObject:self.contents forKey:XSGSnippetContentsKey];
 }

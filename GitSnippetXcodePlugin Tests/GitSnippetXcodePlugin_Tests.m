@@ -32,4 +32,31 @@
     
 }
 
+- (void)testAdd {
+    
+    [[NSUserDefaults standardUserDefaults] setURL:[NSURL URLWithString:@"git@github.com:acoomans/test.git"] forKey:GSRemoteRepositoryURLKey];
+    
+    GitSnippetXcodePlugin *plugin = [[GitSnippetXcodePlugin alloc] init];
+    
+    NSError *error = nil;
+    for (NSString *plistFilename in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:plugin.snippetDirectoryPath error:&error]) {
+        NSString *plistPath = [plugin.snippetDirectoryPath stringByAppendingPathComponent:plistFilename];
+        
+        BOOL isDirectory;
+        [[NSFileManager defaultManager] fileExistsAtPath:plistPath isDirectory:&isDirectory];
+        
+        if (!isDirectory && [plistFilename hasSuffix:@".codesnippet"]) {
+            
+            GSSnippet *snippet = [[GSSnippet alloc] initWithCoder:[GSSnippetPlistUnarchiver unarchiveObjectWithFile:plistPath]];
+            
+            [plugin initializeLocalRepository];
+            [plugin addSnippetToLocalRepositoryWithIdentifier:snippet.identifier];
+            [plugin updateLocalWithRemoteRepository];
+        }
+    }
+    
+    NSLog(@"%@", plugin.taskLog);
+    
+}
+
 @end

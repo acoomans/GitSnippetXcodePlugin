@@ -8,9 +8,89 @@
 
 #import "GitSnippetXcodePlugin.h"
 
-static GitSnippetXcodePlugin *sharedPlugin;
+#import "swizzling.h" // da magic book
+#import "IDECodeSnippet.h"
+#import "IDECodeSnippetRepository.h"
+
+
+static GitSnippetXcodePlugin *shareGitSnippetXcodePlugin;
 static NSString * const pluginMenuTitle = @"Plug-ins";
 NSString * const GSRemoteRepositoryURLKey = @"GSRemoteRepositoryURLKey";
+
+
+
+// gettin doppelgangers ready
+
+void override_IDECodeSnippetRepository_saveUserCodeSnippetToDisk(id self, SEL _cmd, id arg1) {
+
+    [(IDECodeSnippetRepository*)self old_saveUserCodeSnippetToDisk:arg1];
+    
+    GSSnippet *snippet = [[GSSnippet alloc] initWithDictionaryRepresentation:[arg1 dictionaryRepresentation]];
+    
+    
+    NSLog(@"%@ %@", snippet.title, snippet.identifier);
+    NSLog(@"%@", [GitSnippetXcodePlugin sharedPlugin]);
+    NSLog(@"%@", [GitSnippetXcodePlugin sharedPlugin].remoteRepositoryURL);
+    NSLog(@"%@", snippet.isUserSnippet?@"YES":@"NO");
+    
+    
+    
+    if ([GitSnippetXcodePlugin sharedPlugin].remoteRepositoryURL && snippet.isUserSnippet) {
+        
+        [[GitSnippetXcodePlugin sharedPlugin] initializeLocalRepository];
+        [[GitSnippetXcodePlugin sharedPlugin] addSnippetToLocalRepository:snippet];
+        [[GitSnippetXcodePlugin sharedPlugin] updateLocalWithRemoteRepository];
+    }
+
+    
+    /*
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        
+        // fool the guards
+        GSSnippet *snippet = (GSSnippet*)arg1;
+        NSLog(@"%@ %@", snippet.title, snippet.identifier);
+        NSLog(@"%@", [GitSnippetXcodePlugin sharedPlugin]);
+        NSLog(@"%@", [GitSnippetXcodePlugin sharedPlugin].remoteRepositoryURL);
+        NSLog(@"%@", snippet.isUserSnippet?@"YES":@"NO");
+        
+        if ([GitSnippetXcodePlugin sharedPlugin].remoteRepositoryURL && snippet.isUserSnippet) {
+            NSLog(@"Adding snippet \"%@\" (%@) to repository", [arg1 title], [arg1 identifier]);
+            
+            [[GitSnippetXcodePlugin sharedPlugin] initializeLocalRepository];
+            [[GitSnippetXcodePlugin sharedPlugin] addSnippetToLocalRepositoryWithIdentifier:[arg1 identifier]];
+            [[GitSnippetXcodePlugin sharedPlugin] updateLocalWithRemoteRepository];
+        }
+    });*/
+    
+    
+}
+
+void override_IDECodeSnippetRepository_removeCodeSnippet(id self, SEL _cmd, id arg1) {
+    
+    
+    GSSnippet *snippet = [[GSSnippet alloc] initWithDictionaryRepresentation:[arg1 dictionaryRepresentation]];
+    
+    if ([GitSnippetXcodePlugin sharedPlugin].remoteRepositoryURL && snippet.isUserSnippet) {
+        
+        [[GitSnippetXcodePlugin sharedPlugin] initializeLocalRepository];
+        [[GitSnippetXcodePlugin sharedPlugin] removeSnippetFromLocalRepository:snippet];
+        [[GitSnippetXcodePlugin sharedPlugin] updateLocalWithRemoteRepository];
+        
+        /*
+        NSLog(@"Removing snippet \"%@\" (%@) to repository", [arg1 title], [arg1 identifier]);
+        
+        [[GitSnippetXcodePlugin sharedPlugin] initializeLocalRepository];
+        [[GitSnippetXcodePlugin sharedPlugin] removeSnippetFromLocalRepositoryWithIdentifier:[arg1 identifier]];
+        [[GitSnippetXcodePlugin sharedPlugin] updateLocalWithRemoteRepository];
+         */
+    }
+    
+    [(IDECodeSnippetRepository*)self old_removeCodeSnippet:arg1];
+}
+
+
 
 @interface GitSnippetXcodePlugin()
 @property (nonatomic, strong) NSBundle *bundle;
@@ -20,13 +100,17 @@ NSString * const GSRemoteRepositoryURLKey = @"GSRemoteRepositoryURLKey";
 
 @implementation GitSnippetXcodePlugin
 
+
++ (instancetype)sharedPlugin {
+    return shareGitSnippetXcodePlugin;
+}
+
 + (void)pluginDidLoad:(NSBundle *)plugin {
-    static id sharedPlugin = nil;
     static dispatch_once_t onceToken;
     NSString *currentApplicationName = [[NSBundle mainBundle] infoDictionary][@"CFBundleName"];
     if ([currentApplicationName isEqual:@"Xcode"]) {
         dispatch_once(&onceToken, ^{
-            sharedPlugin = [[self alloc] initWithBundle:plugin];
+            shareGitSnippetXcodePlugin = [[self alloc] initWithBundle:plugin];
         });
     }
 }
@@ -35,8 +119,20 @@ NSString * const GSRemoteRepositoryURLKey = @"GSRemoteRepositoryURLKey";
     return [self initWithBundle:nil];
 }
 
+
 - (id)initWithBundle:(NSBundle *)plugin {
     if (self = [super init]) {
+        
+        // summon the snippets repository from the bundle
+        
+        [[NSBundle bundleWithIdentifier:@"com.apple.dt.IDE.IDECodeSnippetLibrary"] load];
+        Class cls = NSClassFromString(@"IDECodeSnippetRepository");
+        
+        // teleport the doppelgangers in the royal court
+        
+        MethodSwizzleWithIMP(cls, NSSelectorFromString(@"saveUserCodeSnippetToDisk:"), NSSelectorFromString(@"old_saveUserCodeSnippetToDisk:"), (IMP)override_IDECodeSnippetRepository_saveUserCodeSnippetToDisk);
+        MethodSwizzleWithIMP(cls, NSSelectorFromString(@"removeCodeSnippet:"), NSSelectorFromString(@"old_removeCodeSnippet:"), (IMP)override_IDECodeSnippetRepository_removeCodeSnippet);
+        
         
         // reference to plugin's bundle, for resource acccess
         self.bundle = plugin;
@@ -293,6 +389,63 @@ NSString * const GSRemoteRepositoryURLKey = @"GSRemoteRepositoryURLKey";
             }
         }
     }
+}
+
+- (void)addSnippetToLocalRepository:(GSSnippet*)snippet {
+    
+    NSError *error = nil;
+    for (NSString *textFilename in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.localRepositoryPath
+                                                                                       error:&error]) {
+        
+        NSString *textPath = [self.localRepositoryPath stringByAppendingPathComponent:textFilename];
+        
+        BOOL isDirectory;
+        [[NSFileManager defaultManager] fileExistsAtPath:textPath isDirectory:&isDirectory];
+        
+        if (!isDirectory && ![textFilename hasPrefix:@"."]) {
+            
+            @try {
+                GSSnippet *s = [[GSSnippet alloc] initWithCoder:[GSSnippetTextUnarchiver unarchiveObjectWithFile:textPath]];
+                
+                if ([s.identifier isEqualToString:snippet.identifier]) {
+                    NSString *output;
+                    [NSTask launchAndWaitTaskWithLaunchPath:@"/usr/bin/git"
+                                                  arguments:@[@"rm", textFilename]
+                                     inCurrentDirectoryPath:self.localRepositoryPath
+                                     standardOutputAndError:&output];
+                    self.taskLog = [self.taskLog stringByAppendingString:output];
+                }
+            }
+            @catch (NSException *e) {
+            }
+        }
+    }
+
+    NSString *textFilename =  [[[[snippet.title lowercaseString] stringByAppendingString:@".m"] stringByReplacingOccurrencesOfString:@" " withString:@"_"] stringBySanitizingFilename];
+    
+    NSString *textPath = [NSString pathWithComponents:@[[self snippetDirectoryPath], @"git", textFilename]];
+    
+    [GSSnippetTextArchiver archiveRootObject:snippet toFile:textPath];
+    
+    NSString *output;
+    [NSTask launchAndWaitTaskWithLaunchPath:@"/usr/bin/git"
+                                  arguments:@[@"add", textFilename]
+                     inCurrentDirectoryPath:self.localRepositoryPath
+                     standardOutputAndError:&output];
+    self.taskLog = [self.taskLog stringByAppendingString:output];
+
+}
+
+- (void)removeSnippetFromLocalRepository:(GSSnippet*)snippet {
+    
+    NSString *textFilename =  [[[[snippet.title lowercaseString] stringByAppendingString:@".m"] stringByReplacingOccurrencesOfString:@" " withString:@"_"] stringBySanitizingFilename];
+    
+    NSString *output;
+    [NSTask launchAndWaitTaskWithLaunchPath:@"/usr/bin/git"
+                                  arguments:@[@"rm", textFilename]
+                     inCurrentDirectoryPath:self.localRepositoryPath
+                     standardOutputAndError:&output];
+    self.taskLog = [self.taskLog stringByAppendingString:output];
 }
 
 @end
