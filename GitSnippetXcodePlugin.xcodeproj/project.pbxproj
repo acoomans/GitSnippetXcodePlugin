@@ -60,6 +60,7 @@
 		5112DC5D18A840140018655E /* GitSnippetXcodePlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GitSnippetXcodePlugin.m; sourceTree = "<group>"; };
 		5112DC5F18A840140018655E /* GitSnippetXcodePlugin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GitSnippetXcodePlugin-Prefix.pch"; sourceTree = "<group>"; };
 		511A88B118A8463800EDCE4B /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		5145FB9F18A8684100DAB43E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		5155884118A8509200447A51 /* GitSnippetXcodePlugin Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GitSnippetXcodePlugin Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5155884518A8509200447A51 /* GitSnippetXcodePlugin Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GitSnippetXcodePlugin Tests-Info.plist"; sourceTree = "<group>"; };
 		5155884718A8509200447A51 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -113,6 +114,7 @@
 		5112DC4618A840140018655E = {
 			isa = PBXGroup;
 			children = (
+				5145FB9F18A8684100DAB43E /* README.md */,
 				5112DC5618A840140018655E /* GitSnippetXcodePlugin */,
 				5155884318A8509200447A51 /* GitSnippetXcodePlugin Tests */,
 				5112DC5118A840140018655E /* Frameworks */,
