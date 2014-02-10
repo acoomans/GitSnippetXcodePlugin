@@ -114,6 +114,18 @@ NSString * const GSRemoteRepositoryURLKey = @"GSRemoteRepositoryURLKey";
 }
 
 - (void)syncMenuAction {
+    
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:GSRemoteRepositoryURLKey]) {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"No remote repository configured"
+                                         defaultButton:nil
+                                       alternateButton:nil
+                                           otherButton:nil
+                             informativeTextWithFormat:@""];
+        alert.delegate = self;
+        [alert runModal];
+        [self configureMenuAction];
+    }
+
     [self initializeLocalRepository];
     [self copySnippetsToLocalRepository];
     [self updateLocalWithRemoteRepository];
